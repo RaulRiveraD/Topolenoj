@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRESUPUESTO DE LEVANTAMIENTO TOPOGRÁFICO</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <center>
+        <h2>PRESUPUESTO DE LEVANTAMIENTO TOPOGRÁFICO</h2>
+    </center>
+
+    <div class="image-container">
+        <img src="Lego.jpeg" alt="Topographic Survey 1" class="animated-image">
+    </div>
+
+    <h4>Datos Personales</h4>
+    <form id="quizForm1">
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre">
+        </div>
+        <div>
+            <label for="edad">Edad</label>
+            <input type="text" id="edad" name="edad">
+        </div>
+        <div>
+            <label for="sexo">Sexo</label>
+            <input type="text" id="sexo" name="sexo">
+        </div>
+        <div>
+            <label for="telefono">Número de Teléfono</label>
+            <input type="text" id="telefono" name="telefono">
+        </div>
+        <div>
+            <label for="correo">Correo Electrónico</label>
+            <input type="text" id="correo" name="correo">
+        </div> 
+    </form>
+
+    <h4>Datos del Terreno</h4>
+    <form id="quizForm2">
+        <div>
+            <label for="relieve">Relieve del Terreno</label>
+            <select id="relieve" name="relieve">
+                <option value="0">Llano</option>
+                <option value="400">Depresión</option>
+                <option value="700">Montañoso</option>
+            </select>
+        </div>
+        <div>
+            <label for="vegetacion">Vegetación del Terreno</label>
+            <select id="vegetacion" name="vegetacion">
+                <option value="0">Nula</option>
+                <option value="100">Poca</option>
+                <option value="200">Media</option>
+                <option value="400">Mucha</option>
+            </select>
+        </div>
+        <div>
+            <label for="ubicacion">Ubicación del Terreno</label>
+            <select id="ubicacion" name="ubicacion">
+                <option value="100">2 - 4 Km</option>
+                <option value="250">5 - 9 Km</option>
+                <option value="400">10 - 14 Km</option>
+                <option value="500">15 - más Km</option>
+            </select>
+        </div>
+        <div>
+            <label for="dimensiones">Dimensiones m<sup>2</sup></label>
+            <input type="number" id="dimensiones" name="dimensiones">
+        </div>
+    </form>
+
+    <h4>Producto del Terreno</h4>
+    <form id="quizForm3">
+        <div>
+            <label for="producto">Tipos de Producto</label>
+            <select id="producto" name="producto">
+                <option value="1500">Levantamiento general de la poligonal</option>
+                <option value="1300">Replanteo de los puntos</option>
+                <option value="1400">Curvas de nivel del terreno</option>
+                <option value="1500">Secciones transversales</option>
+            </select>
+        </div>
+    </form>
+
+    <h4>Equipo para Realizar el Levantamiento</h4>
+    <form id="quizForm4">
+        <div>
+            <label for="equipo">Tipos de Equipo</label>
+            <select id="equipo" name="equipo">
+                <option value="1200">Equipo de Drone y accesorios: a partir de 50,000 m<sup>2</sup></option>
+                <option value="1000">Equipo de RTK y accesorios: a partir de 50,000 m<sup>2</sup></option>
+                <option value="700">Equipo de Estación Total y accesorios: a partir de 500 m<sup>2</sup></option>
+                <option value="500">Equipo de Nivel Fijo y accesorios</option>
+                <option value="300">Cinta, plomada y brújula: de máximo 500 m<sup>2</sup></option>
+            </select>
+        </div>
+    </form>
+
+    <h4>Datos de Entrega</h4>
+    <div>
+        <label for="tipoEntrega">Tipo de Entrega</label>
+        <select id="tipoEntrega" name="tipoEntrega">
+            <option value="100"> Archivo DWG </option>
+            <option value="80">Archivo PDF</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="nivelEntrega">Nivel de Entrega</label>
+        <select id="nivelEntrega" name="nivelEntrega">
+            <option value="150"> Alto </option>
+            <option value="100">Medio</option>
+            <option value="0">Bajo</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="tamanoPapel">Tipos de Papel-Tamaño</label>
+        <select id="tamanoPapel" name="tamanoPapel">
+            <option value="20">T/Carta</option>
+            <option value="30">T/ Doble Carta</option>
+            <option value="25">Tabloide -A4</option>
+            <option value="40">60 x 45 cm</option>
+            <option value="60">90 x 60 cm</option>
+            <option value="80">100 x 120 cm</option>
+        </select>
+    </div>
+    <br>
+    <button type="button" onclick="calculateScore()">Calcular Resultados</button>
+    <p id="resultado"></p>
+</div>
+
+<script>
+function calculateScore() {
+    // Obtener los valores seleccionados
+    var relieveTerreno = parseInt(document.getElementById('relieve').value);
+    var vegetacionTerreno = parseInt(document.getElementById('vegetacion').value);
+    var ubicacionTerreno = parseInt(document.getElementById('ubicacion').value);
+    var dimensionesTerreno = parseFloat(document.getElementById('dimensiones').value);
+    var tipoProducto = parseInt(document.getElementById('producto').value);
+    var tipoEquipo = parseInt(document.getElementById('equipo').value);
+    var tipoEntrega = parseInt(document.getElementById('tipoEntrega').value);
+    var nivelEntrega = parseInt(document.getElementById('nivelEntrega').value);
+    var tamanoPapel = parseInt(document.getElementById('tamanoPapel').value);
+
+    // Verificar que las dimensiones sean un número válido
+    if (isNaN(dimensionesTerreno) || dimensionesTerreno <= 0) {
+        alert("Por favor, ingrese un valor válido para las dimensiones del terreno.");
+        return;
+    }
+
+    // Calcular el costo por metro cuadrado (0.08 por metro cuadrado)
+    var costoPorMetroCuadrado = 0.004;
+    var costoDimensiones = dimensionesTerreno * costoPorMetroCuadrado;
+
+    // Realizar la sumatoria
+    var sumatoria = relieveTerreno + vegetacionTerreno + ubicacionTerreno + costoDimensiones + tipoProducto + tipoEquipo + tipoEntrega + nivelEntrega + tamanoPapel;
+  
+    // Mostrar el resultado en el elemento HTML
+    document.getElementById('resultado').textContent = 'El costo total es de: $' + sumatoria.toFixed(2);
+}
+</script>
+</body>
+</html>
